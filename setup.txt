@@ -1,0 +1,14 @@
+npm init -y
+npm install express pg express-handlebars body-parser bcrypt
+
+# Database
+CREATE DATABASE project
+\c project
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL
+);
+
+
