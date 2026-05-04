@@ -47,7 +47,7 @@ BEGIN
 
     IF stored_hash = crypt(input_password, stored_hash) THEN
         new_session := gen_random_uuid()::TEXT;
-        INSERT INTO user_sessions(session_id, username, expire_at) VALUES (new_session, input_username, now()+interval '1 hour');
+        INSERT INTO user_sessions(session_id, username, expires_at) VALUES (new_session, input_username, now()+interval '1 hour');
         RETURN new_session;
     ELSE
         RETURN 'Login Failure';

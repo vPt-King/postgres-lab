@@ -1,5 +1,6 @@
 npm init -y
 npm install express pg express-handlebars body-parser bcrypt
+npm install cookie-parser
 
 # Database
 CREATE DATABASE project
