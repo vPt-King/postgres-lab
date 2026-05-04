@@ -12,3 +12,14 @@ CREATE TABLE users (
 );
 
 
+CREATE TABLE user_sessions(
+    session_id TEXT PRIMARY KEY,
+    username TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    expires_at TIMESTAMP NOT NULL, 
+    last_seen_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_user_sessions_username ON user_sessions(username);
+CREATE INDEX idx_user_sessions_sessions_exp ON user_sessions(expires_at);
+
