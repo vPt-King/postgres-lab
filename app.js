@@ -7,6 +7,9 @@ const cookieParser = require("cookie-parser");
 const app = express();
 app.use(cookieParser());
 
+// static files
+app.use(express.static('public'));
+
 // view engine
 app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
@@ -83,6 +86,21 @@ app.get("/admin", async (req, res) => {
   }
 });
 
+
+app.post("/admin/add-product", async (req, res) => {
+  const { name, price, quantity, description } = req.body;
+  try {
+    const result = await pool.query(
+      "SELECT add_product($1, $2, $3, $4)",
+      [name, price, quantity, description]
+    );
+    const result_mess = result.rows[0].add_product;
+    return res.send(result_mess);
+  } catch (err) {
+    console.error(err);
+    res.send("Error");
+  }
+});
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");
