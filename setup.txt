@@ -24,3 +24,28 @@ CREATE TABLE user_sessions(
 CREATE INDEX idx_user_sessions_username ON user_sessions(username);
 CREATE INDEX idx_user_sessions_sessions_exp ON user_sessions(expires_at);
 
+CREATE TABLE products(
+    id SERIAL PRIMARY KEY,
+    name TEXT,
+    description TEXT,
+    quantity INT,
+    price INT,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+INSERT INTO products(name, description, quantity, price) VALUES
+('Basic T-Shirt', '100% cotton T-shirt, breathable and comfortable', 100, 150000),
+('Slim Fit Jeans', 'Stretchable slim fit jeans with modern style', 80, 350000),
+('White Sneakers', 'Trendy unisex white sneakers for everyday wear', 60, 500000),
+('Fleece Hoodie', 'Warm fleece hoodie, perfect for cold weather', 50, 400000),
+('Laptop Backpack 15 Inch', 'Water-resistant backpack with multiple compartments', 40, 300000),
+('Bluetooth Headphones', 'High-quality sound with up to 20 hours battery life', 70, 250000),
+('Wireless Mouse', 'USB wireless mouse with long battery life', 120, 120000),
+('Mechanical Keyboard RGB', 'RGB mechanical keyboard with blue switches', 30, 800000),
+('White Dress Shirt', 'Elegant white shirt suitable for office wear', 90, 200000),
+('Sports Shorts', 'Flexible and breathable sports shorts', 110, 120000),
+('Men Sandals', 'Non-slip sandals, ideal for beach and casual wear', 75, 180000),
+('Crossbody Bag', 'Compact crossbody bag for daily use', 65, 220000),
+('Fashion Watch', 'Stylish waterproof watch with premium design', 25, 950000),
+('Baseball Cap', 'Casual and youthful baseball cap', 130, 90000),
+('UV Protection Sunglasses', 'UV400 sunglasses to protect your eyes', 85, 170000);

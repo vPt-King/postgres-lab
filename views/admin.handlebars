@@ -1,0 +1,79 @@
+<div class="container mt-4">
+    <h1>Admin Panel</h1>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="add-product-tab" data-bs-toggle="tab" data-bs-target="#add-product" type="button" role="tab" aria-controls="add-product" aria-selected="true">Thêm Sản Phẩm</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="manage-orders-tab" data-bs-toggle="tab" data-bs-target="#manage-orders" type="button" role="tab" aria-controls="manage-orders" aria-selected="false">Quản Lý Đơn Hàng</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="adminTabsContent">
+        <!-- Tab Thêm Sản Phẩm -->
+        <div class="tab-pane fade show active" id="add-product" role="tabpanel" aria-labelledby="add-product-tab">
+            <div class="mt-4">
+                <h3>Thêm Sản Phẩm Mới</h3>
+                <form action="/admin/add-product" method="POST">
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Tên Sản Phẩm</label>
+                        <input type="text" class="form-control" id="productName" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Giá</label>
+                        <input type="number" class="form-control" id="productPrice" name="price" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productDescription" class="form-label">Mô Tả</label>
+                        <textarea class="form-control" id="productDescription" name="description" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tab Quản Lý Đơn Hàng -->
+        <div class="tab-pane fade" id="manage-orders" role="tabpanel" aria-labelledby="manage-orders-tab">
+            <div class="mt-4">
+                <h3>Quản Lý Đơn Hàng</h3>
+                <p>Chức năng quản lý đơn hàng sẽ được triển khai ở đây.</p>
+                <!-- Có thể thêm bảng hoặc form cho orders -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Danh Sách Sản Phẩm -->
+    <div class="mt-5">
+        <h3>Danh Sách Sản Phẩm</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Mô Tả</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.price}}</td>
+                    <td>{{this.quantity}}</td>
+                    <td>{{this.description}}</td>
+                    <td>
+                        <a href="/admin/edit-product/{{this.id}}" class="btn btn-sm btn-warning">Sửa</a>
+                        <a href="/admin/delete-product/{{this.id}}" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+

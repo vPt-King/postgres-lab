@@ -71,6 +71,19 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get("/admin", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM products");
+    res.render("admin", {
+      products: result.rows,
+    });
+  } catch (err) {
+    console.error(err);
+    res.send("Error loading products");
+  }
+});
+
+
 app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
