@@ -11,7 +11,10 @@ app.use(cookieParser());
 app.use(express.static('public'));
 
 // view engine
-app.engine("handlebars", exphbs.engine());
+app.engine("handlebars", exphbs.engine({
+  layoutsDir: 'views/layouts',
+  partialsDir: 'views/layouts'
+}));
 app.set("view engine", "handlebars");
 
 // middleware
@@ -99,6 +102,35 @@ app.post("/admin/add-product", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.send("Error");
+  }
+});
+
+app.get("/admin/edit-product/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query("SELECT * FROM products WHERE id = $1", [id]);
+    if (result.rows.length === 0) {
+      return res.send("Product not found");
+    }
+    res.render("edit_product", { product: result.rows[0] });
+  } catch (err) {
+    console.error(err);
+    res.send("Error");
+  }
+});
+
+app.post("/admin/edit-product/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, price, quantity, description } = req.body;
+  try {
+    const result = await pool.query(
+      "SELECT edit_product($1, $2, $3, $4, $5)",
+      [id, name, price, quantity, description]
+    );
+    res.redirect("/admin");
+  } catch (err) {
+    console.error(err);
+    res.send("Error updating product");
   }
 });
 

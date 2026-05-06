@@ -1,0 +1,26 @@
+{{> main}}
+
+<div class="container mt-4">
+    <h1>Chỉnh Sửa Sản Phẩm</h1>
+
+    <form action="/admin/edit-product/{{product.id}}" method="POST">
+        <div class="mb-3">
+            <label for="productName" class="form-label">Tên Sản Phẩm</label>
+            <input type="text" class="form-control" id="productName" name="name" value="{{product.name}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="productPrice" class="form-label">Giá</label>
+            <input type="number" class="form-control" id="productPrice" name="price" value="{{product.price}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="productQuantity" class="form-label">Số lượng</label>
+            <input type="number" class="form-control" id="productQuantity" name="quantity" value="{{product.quantity}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="productDescription" class="form-label">Mô Tả</label>
+            <textarea class="form-control" id="productDescription" name="description" rows="3">{{product.description}}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Cập Nhật Sản Phẩm</button>
+        <a href="/admin" class="btn btn-secondary">Quay Lại</a>
+    </form>
+</div>
