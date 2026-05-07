@@ -134,6 +134,20 @@ app.post("/admin/edit-product/:id", async (req, res) => {
   }
 });
 
+app.post("/admin/delete-product/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      "CALL delete_product($1)",
+      [id]
+    );
+    res.redirect("/admin");
+  } catch (err) {
+    console.error(err);
+    res.send("Error updating product");
+  }
+});
+
 app.listen(3000, () => {
   console.log("Server running on port 3000");
 });

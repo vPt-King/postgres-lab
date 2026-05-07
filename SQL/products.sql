@@ -42,3 +42,12 @@ BEGIN
     RETURN 'Edit product successfully';
 END;
 $$ LANGUAGE plpgsql;
+
+-- delete product
+CREATE OR REPLACE PROCEDURE delete_product(input_id INT)
+AS $$
+BEGIN
+    DELETE FROM products WHERE id = input_id;
+END;
+$$ LANGUAGE plpgsql;
+

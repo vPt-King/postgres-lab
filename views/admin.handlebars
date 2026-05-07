@@ -72,7 +72,9 @@
                     <td>{{this.description}}</td>
                     <td>
                         <a href="/admin/edit-product/{{this.id}}" class="btn btn-sm btn-warning">Sửa</a>
-                        <a href="/admin/delete-product/{{this.id}}" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+                        <form action="/admin/delete-product/{{this.id}}" method="POST" style="display:inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?')">
+                            <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
+                        </form>
                     </td>
                 </tr>
                 {{/each}}
